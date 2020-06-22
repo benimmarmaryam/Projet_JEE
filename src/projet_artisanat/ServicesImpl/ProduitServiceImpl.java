@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import projet_artisanat.Controller.SessionDBUtil;
+import projet_artisanat.Controllers.SessionDBUtil;
 import projet_artisanat.Models.ProduitEntity;
 import projet_artisanat.Services.ProduitService;
 
@@ -13,6 +13,11 @@ import projet_artisanat.Services.ProduitService;
 public class ProduitServiceImpl implements ProduitService {
 
 	public static Session session = SessionDBUtil.getSessionProduitEntity();
+	public static ProduitServiceImpl produitServiceImpl = new ProduitServiceImpl();
+	
+	private ProduitServiceImpl () {
+		
+	}
 	
 	@Override
 	@SuppressWarnings("unchecked")

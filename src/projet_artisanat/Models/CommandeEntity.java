@@ -6,14 +6,25 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Commande", schema = "sR8rO73LvU")
+@Table(name = "Commande", schema = "DB_Artisanat")
 public class CommandeEntity {
     private int cmdid;
     private Date cmddate;
     private int cmdetat;
     private int utilid;
 
-    @Id
+    public CommandeEntity() {
+    	
+    }
+    
+    public CommandeEntity(int cmdid, int cmdetat, int utilid) {
+		super();
+		this.cmdid = cmdid;
+		this.cmdetat = cmdetat;
+		this.utilid = utilid;
+	}
+
+	@Id
     @Column(name = "cmdid", nullable = false)
     public int getCmdid() {
         return cmdid;
@@ -23,8 +34,8 @@ public class CommandeEntity {
         this.cmdid = cmdid;
     }
 
-    @Basic
-    @Column(name = "cmddate", nullable = false)
+   
+    @Column(name = "cmddate", insertable=false)
     public Date getCmddate() {
         return cmddate;
     }

@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Utilisateur", schema = "sR8rO73LvU", catalog = "")
+@Table(name = "Utilisateur", schema = "DB_Artisanat", catalog = "")
 public class UtilisateurEntity {
     private int utilid;
     private String utillogin;
@@ -14,7 +14,12 @@ public class UtilisateurEntity {
     private String utilnom;
     private String utilprenom;
     private String utiltel;
+    private Integer idpanier;
 
+    public UtilisateurEntity() {
+    	
+    }
+    
     public UtilisateurEntity(int utilid, String utillogin, String utilpass, String utilmail, String utilnom,
 			String utilprenom, String utiltel) {
 		super();
@@ -27,16 +32,7 @@ public class UtilisateurEntity {
 		this.utiltel = utiltel;
 	}
 
-	public UtilisateurEntity(String utillogin, String utilpass, String utilmail, String utilnom, String utilprenom,
-			String utiltel) {
-		super();
-		this.utillogin = utillogin;
-		this.utilpass = utilpass;
-		this.utilmail = utilmail;
-		this.utilnom = utilnom;
-		this.utilprenom = utilprenom;
-		this.utiltel = utiltel;
-	}
+
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,7 +105,17 @@ public class UtilisateurEntity {
         this.utiltel = utiltel;
     }
 
-    @Override
+    @Basic
+    @Column(name = "idpanier", nullable = true)
+    public Integer getIdpanier() {
+		return idpanier;
+	}
+
+	public void setIdpanier(Integer idpanier) {
+		this.idpanier = idpanier;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

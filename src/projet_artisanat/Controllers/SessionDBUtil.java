@@ -1,4 +1,4 @@
-package projet_artisanat.Controller;
+package projet_artisanat.Controllers;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +22,8 @@ public class SessionDBUtil {
 	private Session sessionLigneCommande;
 	private Session sessionProduit;
 	private Session sessionUtilisateur;
+	static int idUser = 1;
+	static int pdtid;
 	
 	
 	private SessionDBUtil() {

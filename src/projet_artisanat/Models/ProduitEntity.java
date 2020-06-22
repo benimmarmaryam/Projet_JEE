@@ -1,22 +1,32 @@
 package projet_artisanat.Models;
 
 
-import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Objects;
 
+import javax.faces.bean.ManagedBean;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@ManagedBean
 @Entity
-@Table(name = "Produit", schema = "sR8rO73LvU", catalog = "")
+@Table(name = "Produit", schema = "DB_Artisanat", catalog = "")
 public class ProduitEntity {
     private int pdtid;
     private String pdtdesignation;
     private double pdtprix;
     private int qtestock;
-    private byte[] pdtimg;
+    private String pdtimg;
     private String pdtdescription;
     private int catid;
 
-    public ProduitEntity(int pdtid, String pdtdesignation, double pdtprix, int qtestock, byte[] pdtimg,
+    public ProduitEntity() {
+    	
+    }
+    
+    public ProduitEntity(int pdtid, String pdtdesignation, double pdtprix, int qtestock, String pdtimg,
 			String pdtdescription) {
 		super();
 		this.pdtid = pdtid;
@@ -69,11 +79,11 @@ public class ProduitEntity {
 
     @Basic
     @Column(name = "pdtimg", nullable = false)
-    public byte[] getPdtimg() {
+    public String getPdtimg() {
         return pdtimg;
     }
 
-    public void setPdtimg(byte[] pdtimg) {
+    public void setPdtimg(String pdtimg) {
         this.pdtimg = pdtimg;
     }
 
@@ -97,6 +107,8 @@ public class ProduitEntity {
 	public void setCatid(int catid) {
 		this.catid = catid;
 	}
+	
+
 
 	@Override
     public boolean equals(Object o) {
@@ -107,14 +119,19 @@ public class ProduitEntity {
                 Double.compare(that.pdtprix, pdtprix) == 0 &&
                 qtestock == that.qtestock &&
                 Objects.equals(pdtdesignation, that.pdtdesignation) &&
-                Arrays.equals(pdtimg, that.pdtimg) &&
+                pdtimg.equals(that.pdtimg) &&
                 Objects.equals(pdtdescription, that.pdtdescription);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(pdtid, pdtdesignation, pdtprix, qtestock, pdtdescription);
-        result = 31 * result + Arrays.hashCode(pdtimg);
+        result = 31 * result + Objects.hashCode(pdtimg);
         return result;
+    }
+    
+    @Override 
+    public String toString() {
+    	return "{"+pdtid + "," + pdtprix +","+ qtestock +","+ pdtdesignation +","+ pdtdescription +"}";
     }
 }

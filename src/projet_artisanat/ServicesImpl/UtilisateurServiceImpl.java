@@ -5,14 +5,19 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import projet_artisanat.Controller.SessionDBUtil;
+import projet_artisanat.Controllers.SessionDBUtil;
 import projet_artisanat.Models.UtilisateurEntity;
 import projet_artisanat.Services.UtilisateurService;
 
 public class UtilisateurServiceImpl implements UtilisateurService{
 	
 	public static Session session = SessionDBUtil.getSessionUtilisateurEntity();
-
+	public static UtilisateurServiceImpl utilisateurServiceImpl = new UtilisateurServiceImpl();
+	
+	private UtilisateurServiceImpl () {
+		
+	}
+	
 	@Override
 	public UtilisateurEntity findById(Integer id) {
 

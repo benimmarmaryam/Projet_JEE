@@ -10,9 +10,22 @@ public class LigneCommandeEntityPK implements Serializable {
     /**
 	 * 
 	 */
+	
+
 	private static final long serialVersionUID = 1L;
 	private int prodid;
-    private int cmdid;
+    private int cmdid;	
+    
+	public LigneCommandeEntityPK() {
+		
+	}
+	
+	public LigneCommandeEntityPK(int prodid, int cmdid) {
+		super();
+		this.prodid = prodid;
+		this.cmdid = cmdid;
+	}
+
 
     @Column(name = "prodid", nullable = false)
     @Id

@@ -7,7 +7,7 @@ import projet_artisanat.Models.CommandeEntity;
 public interface CommandeService {
 
 	CommandeEntity findById(Integer id);
-	List<CommandeEntity> findCarteAll();
+	List<CommandeEntity> findCateAll();
     void save(CommandeEntity commande);
     
 }

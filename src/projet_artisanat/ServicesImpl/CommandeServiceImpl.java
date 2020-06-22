@@ -5,13 +5,18 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import projet_artisanat.Controller.SessionDBUtil;
+import projet_artisanat.Controllers.SessionDBUtil;
 import projet_artisanat.Models.CommandeEntity;
 import projet_artisanat.Services.CommandeService;
 
 public class CommandeServiceImpl implements CommandeService {
 
 	public static Session session = SessionDBUtil.getSessionCommandeEntity();
+	public static CommandeServiceImpl commandeServiceImpl = new CommandeServiceImpl();
+	
+	private CommandeServiceImpl() {
+		
+	}
 	
 	@Override
 	public CommandeEntity findById(Integer id) {
@@ -24,7 +29,7 @@ public class CommandeServiceImpl implements CommandeService {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<CommandeEntity> findCarteAll() {
+	public List<CommandeEntity> findCateAll() {
 		return (List<CommandeEntity>) session.createCriteria(CommandeEntity.class).list();	
 	}
 
@@ -34,7 +39,6 @@ public class CommandeServiceImpl implements CommandeService {
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(commande);
 		transaction.commit();
-
 	}
 
 }

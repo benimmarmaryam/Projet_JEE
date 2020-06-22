@@ -5,12 +5,26 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Ligne_commande", schema = "sR8rO73LvU", catalog = "")
+@Table(name = "Ligne_commande", schema = "DB_Artisanat", catalog = "")
 @IdClass(LigneCommandeEntityPK.class)
 public class LigneCommandeEntity {
-    private int prodid;
+	
+	private int prodid;
     private int cmdid;
     private int qte;
+    
+	public LigneCommandeEntity() {
+		
+	}
+	
+	
+	
+    public LigneCommandeEntity(int prodid, int cmdid, int qte) {
+		super();
+		this.prodid = prodid;
+		this.cmdid = cmdid;
+		this.qte = qte;
+	}
 
     @Id
     @Column(name = "prodid", nullable = false)
@@ -56,4 +70,10 @@ public class LigneCommandeEntity {
     public int hashCode() {
         return Objects.hash(prodid, cmdid, qte);
     }
+    
+    @Override
+    public String toString() {
+    	return prodid+" :" +cmdid + ":" +qte;
+    }
 }
+

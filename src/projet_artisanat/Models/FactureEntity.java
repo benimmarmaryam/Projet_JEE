@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Facture", schema = "sR8rO73LvU", catalog = "")
+@Table(name = "Facture", schema = "DB_Artisanat", catalog = "")
 public class FactureEntity {
     private int factid;
     private Date factdate;

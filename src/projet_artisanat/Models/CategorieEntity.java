@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Categorie", schema = "sR8rO73LvU", catalog = "")
+@Table(name = "Categorie", schema = "DB_Artisanat", catalog = "")
 public class CategorieEntity {
     private int catid;
     private String catlib;

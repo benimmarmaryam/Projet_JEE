@@ -2,16 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      > 
 
 <h:head></h:head> 
 <h:body>
-	<h1> Bonjour #{categorieBean.lib} </h1>
+	<h1> Bonjour</h1>
 	
 	<h:form>
 	Nom <h:inputText value="#{categorieBean.lib}"></h:inputText>
 	<h:commandButton value="Afficher Nom"></h:commandButton>
 	</h:form>
+	
+	<p:repeat var="produit" value="#{produitsBean.listProduits}">
+
+		 	<p:column headerText="Designation">
+		 		<h:outputText value="#{produit.pdtdesignation}" />
+		 	</p:column>
+		 	<p:column headerText="Test">
+		 		<h:outputText value="Test" />
+		 	</p:column>
+		 	<p:column>
+		 	  <p:column>
+		        <p:graphicImage  value="#{produit.pdtimg}" width="100"  id="grpImage" height="80"/>
+          </p:column>
+    </p:column>
+		
+		</p:repeat>
+		
+		
+
 	
 </h:body> 
 </html>
