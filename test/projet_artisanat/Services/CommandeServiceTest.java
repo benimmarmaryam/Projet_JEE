@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import projet_artisanat.Models.CommandeEntity;
-import projet_artisanat.Models.ProduitEntity;
 import projet_artisanat.ServicesImpl.CommandeServiceImpl;
 
 class CommandeServiceTest {
