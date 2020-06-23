@@ -49,10 +49,6 @@
                     <li class="active"><a href="checkout.xhtml">Paiement</a></li>
                 </ul>
             </nav>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""/> Cart <span>(0)</span></a>
-            </div>
         </header>
         <!-- Header Area End -->
 
@@ -68,8 +64,8 @@
                             </ul>
 							<h:form>
 								<p:selectOneRadio id="console" value="#{commandeController.modePaiment}" unselectable="false" layout="responsive" columns="2">
-						            <f:selectItem itemLabel="Paiement à la livraison" itemValue="1"  class="custom-control-input"/><br/>
-						            <f:selectItem itemLabel="Paypal" itemValue="2"  class="custom-control-input"/>
+						            <f:selectItem itemLabel="Paiement à la livraison" itemValue="2"  class="custom-control-input"/><br/>
+						            <f:selectItem itemLabel="Paypal" itemValue="3"  class="custom-control-input"/>
         						</p:selectOneRadio>
         					
         						<div class="cart-btn mt-100">

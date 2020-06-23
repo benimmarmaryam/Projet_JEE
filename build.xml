@@ -181,4 +181,19 @@
             <report format="frames" todir="${junit.output.dir}"/>
         </junitreport>
     </target>
+<!--
+              	
+    <target name="war" description="Projet Artisanat" depends="clean, build">
+    	<mkdir dir="WebContent/WEB-INF/classes"/>
+    	
+    	<copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
+    		<fileset dir="build/classes">
+    				<include name="**/*.class"/>
+    		</fileset>
+    	</copy>
+    	
+    	<war destfile="build/Projet_JEE.war" basedir="WebContent" needxmlfile="false">
+    	</war>
+    </target>
+    -->
 </project>

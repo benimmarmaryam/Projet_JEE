@@ -21,10 +21,10 @@ public class ProduitController {
 	public ProduitServiceImpl produitServiceImpl ;
 	public ProduitEntity produit;
 	public int pdtid;
-	public int utilid = SessionDBUtil.idUser;
 	public int qte = 1;
 	
 	public ProduitController() {
+		
 		produitServiceImpl = ProduitServiceImpl.produitServiceImpl;
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
@@ -56,8 +56,12 @@ public class ProduitController {
 	}
 
 	public String ajoutAuPanier() {
+		if(SessionDBUtil.idUser == null) {
+			SessionDBUtil.setMessage("Vous devez vous connectez pour ajouter un produit au panier");
+			return "/Login.xhtml?faces-redirect=true";
+		}
 
-		UtilisateurEntity utilisateur = UtilisateurServiceImpl.utilisateurServiceImpl.findById(utilid);
+		UtilisateurEntity utilisateur = UtilisateurServiceImpl.utilisateurServiceImpl.findById(SessionDBUtil.idUser);
     	int commandeid;
     	
     	if(utilisateur.getIdpanier() == null) {
@@ -74,7 +78,7 @@ public class ProduitController {
     		commandeid = utilisateur.getIdpanier();	
     	}
     	
-    	//ajout d'une nouvelle ligne de commande
+    	//Add new Command Ligne
     	LigneCommandeEntity ligneCommande = LigneCommandeServiceImpl.ligneCommandeServiceImpl.findByPk(new LigneCommandeEntityPK(pdtid , commandeid));
     	if(ligneCommande == null) {
     		ligneCommande = new LigneCommandeEntity(pdtid , commandeid, qte);
@@ -85,5 +89,10 @@ public class ProduitController {
 
         return "/cart.xhtml?faces-redirect=true";
     }
+	
+	
+	public int getDisplay() {
+		return (SessionDBUtil.idUser == null) ? 0 : 1 ;
+	}
 	
 }

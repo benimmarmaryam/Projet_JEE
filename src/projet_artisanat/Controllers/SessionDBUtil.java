@@ -22,8 +22,9 @@ public class SessionDBUtil {
 	private Session sessionLigneCommande;
 	private Session sessionProduit;
 	private Session sessionUtilisateur;
-	static int idUser = 1;
-	static int pdtid;
+	static Integer idUser;
+	static Integer pdtid;
+	static String message ="";
 	
 	
 	private SessionDBUtil() {
@@ -67,5 +68,15 @@ public class SessionDBUtil {
 		Session session = sessionFactory.openSession();
 		return session;
 	}
+
+	public static String getMessage() {
+		return message;
+	}
+
+	public static void setMessage(String message) {
+		SessionDBUtil.message = message;
+	}
+	
+	
 }
 

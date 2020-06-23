@@ -4,6 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jstl/core"
       >
 
 <h:head>
@@ -46,14 +47,12 @@
                <ul>
                     <li ><a href="index.xhtml">Home</a></li>
                     <li class="active"><a href="#">Produit</a> </li>
-                    <li><a href="cart.xhtml">Panier</a></li>
-                    <li><a href="checkout.xhtml">Paiement</a></li>
+                     <c:if test="#{produitController.display eq 1}">
+                        <li><a href="cart.xhtml">Panier</a></li>
+                        <li><a href="checkout.xhtml">Paiement</a></li>
+                    </c:if>
                 </ul>
             </nav>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.xhtml" class="cart-nav"><img src="img/core-img/cart.png" alt=""/> Cart <span>(0)</span></a>
-            </div>
         </header>
         <!-- Header Area End -->
 
@@ -109,7 +108,7 @@
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Quantite</p>
                                     <div class="quantity">
-                                    	<p:spinner id="step" value="#{produitController.qte}" stepFactor="1"  min="1" max="100" />    
+                                    	<p:spinner id="step" value="#{produitController.qte}" stepFactor="1"  min="1" max="#{produitController.produit.qtestock}" />    
                                     </div>
                                 </div>
                                 <h:commandButton value="Ajouter au Panier" action="#{produitController.ajoutAuPanier}"  class="btn amado-btn"/>

@@ -51,23 +51,20 @@
                 <ul>
                     <li class="active"><a href="index.xhtml">Home</a></li>
                     <li><a href="cart.xhtml">Panier</a></li>
-                    <li><a href="checkout.xhtml">Paiement</a></li>
                 </ul>
             </nav>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.xhtml" class="cart-nav"><img src="img/core-img/cart.png" alt=""/> Cart <span>(0)</span></a>
-            </div>
         </header>
         <!-- Header Area End -->
 
 
         <div class="amado_product_area section-padding-100">
             <div class="container-fluid">
-
+                <h4 style="color:#FBB710">#{produitsController.message}</h4>
                 
 
                 <div class="row">
+                    
+
 					<p:repeat var="produit" value="#{produitsController.listProduits}">
 			 
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">

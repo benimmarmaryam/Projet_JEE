@@ -11,11 +11,14 @@ import projet_artisanat.ServicesImpl.ProduitServiceImpl;
 public class ProduitsController {
 	
 	public ProduitServiceImpl produitServiceImpl ;
+	public String message;
 	
 	public List<ProduitEntity> listProduits;
 	public int taille;
 	
 	public ProduitsController() {
+		message = SessionDBUtil.getMessage();
+		SessionDBUtil.setMessage("");
 		produitServiceImpl = ProduitServiceImpl.produitServiceImpl;
 		listProduits = produitServiceImpl.findAll();
 		this.taille = listProduits.size();
@@ -36,8 +39,11 @@ public class ProduitsController {
 	public void setTaille(int taille) {
 		this.taille = taille;
 	}
-	
-	
+
+	public String getMessage() {
+		return message;
+	}
+
 	
 }
 

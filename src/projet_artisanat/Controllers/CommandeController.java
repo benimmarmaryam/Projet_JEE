@@ -1,8 +1,11 @@
 package projet_artisanat.Controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import projet_artisanat.Models.CommandeEntity;
 import projet_artisanat.Models.LigneCommandeEntity;
@@ -18,14 +21,34 @@ public class CommandeController {
 
 	public CommandeServiceImpl commandeServiceImpl;
 	public List<LigneCommandeEntity> ligneCommandeList;
-	public int idCommande;
+	public Integer idCommande;
 	public String message;
-	public int modePaiment;
+	public int modePaiment = 2;
 	
 	public CommandeController() {
-		modePaiment = 1;
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+		try {
+			if(SessionDBUtil.idUser == null) {
+				SessionDBUtil.setMessage("Vous devez vous connectez pour consulter le panier");
+				response.sendRedirect("Login.xhtml");
+				return;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		idCommande = UtilisateurServiceImpl.utilisateurServiceImpl.findById(SessionDBUtil.idUser).getIdpanier();
-		ligneCommandeList = LigneCommandeServiceImpl.ligneCommandeServiceImpl.findAllBycmdid(idCommande);
+		if(idCommande !=null)
+			ligneCommandeList = LigneCommandeServiceImpl.ligneCommandeServiceImpl.findAllBycmdid(idCommande);
+		else {
+			try {
+					response.sendRedirect("index.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
 	}
 
 
@@ -42,14 +65,14 @@ public class CommandeController {
 	}
 	
 	public void incremete(LigneCommandeEntity lignecommande){
-		if (lignecommande.getQte()+1 <= ProduitServiceImpl.produitServiceImpl.findById(lignecommande.getProdid()).getQtestock()) {
+		if (idCommande !=null && lignecommande.getQte()+1 <= ProduitServiceImpl.produitServiceImpl.findById(lignecommande.getProdid()).getQtestock()) {
 			lignecommande.setQte(lignecommande.getQte()+1);
 			LigneCommandeServiceImpl.ligneCommandeServiceImpl.save(lignecommande);
 		}
 	}
 	
 	public void decremete(LigneCommandeEntity lignecommande){
-		if (lignecommande.getQte() > 1) {
+		if (idCommande !=null && lignecommande.getQte() > 1) {
 			lignecommande.setQte(lignecommande.getQte()-1);
 			LigneCommandeServiceImpl.ligneCommandeServiceImpl.save(lignecommande);
 		}
@@ -57,19 +80,23 @@ public class CommandeController {
 	
 	public double prix() {
 		double somme = 0;
-		for(LigneCommandeEntity l : ligneCommandeList) {
-			somme += ProduitServiceImpl.produitServiceImpl.findById(l.getProdid()).getPdtprix()*l.getQte();
-		}
+		if (idCommande !=null)
+			for(LigneCommandeEntity l : ligneCommandeList) {
+				somme += ProduitServiceImpl.produitServiceImpl.findById(l.getProdid()).getPdtprix()*l.getQte();
+			}
 		return somme;
 	}
 	
-	public void clotureCommande(){
+	public String clotureCommande(){
 		CommandeEntity commande = CommandeServiceImpl.commandeServiceImpl.findById(idCommande);
 		//mode paiement
+		commande.setCmdetat(modePaiment);
 		CommandeServiceImpl.commandeServiceImpl.save(commande);
 		UtilisateurEntity utilisateur = UtilisateurServiceImpl.utilisateurServiceImpl.findById(SessionDBUtil.idUser);
 		utilisateur.setIdpanier(null);
 		UtilisateurServiceImpl.utilisateurServiceImpl.save(utilisateur);
+		SessionDBUtil.setMessage("Commande effectué avec succés");
+		return "/index.xhtml?faces-redirect=true";
 	}
 
 
@@ -82,5 +109,13 @@ public class CommandeController {
 		this.modePaiment = modePaiment;
 	}
 	
+	public String checkout() {
+		if(idCommande !=null) 
+			return "checkout.xhtml?faces-redirect=true";
+		else {
+			return "cart.xhtml";
+		}
+			
+	}
 	
 }

@@ -12,6 +12,11 @@ import projet_artisanat.ServicesImpl.UtilisateurServiceImpl;
 public class LoginController {
 	static UtilisateurEntity utilisater = new UtilisateurEntity();
 	static String message;
+	
+	public LoginController() {
+		message = SessionDBUtil.getMessage();
+		SessionDBUtil.setMessage("");
+	}
 
 	public UtilisateurEntity getUtilisater() {
 		return utilisater;
@@ -29,7 +34,7 @@ public class LoginController {
 			message =  "Mot de passe incorect";
 		}else {
 			SessionDBUtil.idUser = utilsateurDb.getUtilid();
-			return "index.xhtml";
+			return "/index.xhtml?faces-redirect=true";
 		}
 		return "Login";
 	}
