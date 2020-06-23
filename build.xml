@@ -72,6 +72,8 @@
         <pathelement location="WebContent/WEB-INF/lib/org.junit.vintage.engine_5.5.1.v20190826-0900.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/org.opentest4j_1.2.0.v20190826-0900.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/primefaces-6.1.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/servlet-api-3.0-alpha-1.jar"/>
+        <pathelement location="WebContent/WEB-INF/classes"/>
     </path>
     <path id="EAR Libraries.libraryclasspath"/>
     <path id="Projet_JEE.classpath">
@@ -106,6 +108,7 @@
         <pathelement location="WebContent/WEB-INF/lib/org.junit.jupiter.migrationsupport_5.5.1.v20190826-0900.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/org.junit.platform.engine_1.5.1.v20190826-0900.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/servlet-api-3.0-alpha-1.jar"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
@@ -150,10 +153,14 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Test (2)">
-        <java classname="projet_artisanat.Test.Test" failonerror="true" fork="yes">
+    <target name="CommandeServiceTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="projet_artisanat.Services.CommandeServiceTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
             <classpath refid="Projet_JEE.classpath"/>
-        </java>
+        </junit>
     </target>
     <target name="ProduitServiceTest">
         <mkdir dir="${junit.output.dir}"/>
@@ -164,14 +171,10 @@
             <classpath refid="Projet_JEE.classpath"/>
         </junit>
     </target>
-    <target name="CommandeServiceTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="projet_artisanat.Services.CommandeServiceTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
+    <target name="Test (2)">
+        <java classname="projet_artisanat.Test.Test" failonerror="true" fork="yes">
             <classpath refid="Projet_JEE.classpath"/>
-        </junit>
+        </java>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
@@ -181,8 +184,7 @@
             <report format="frames" todir="${junit.output.dir}"/>
         </junitreport>
     </target>
-<!--
-              	
+              	              	
     <target name="war" description="Projet Artisanat" depends="clean, build">
     	<mkdir dir="WebContent/WEB-INF/classes"/>
     	
@@ -192,8 +194,12 @@
     		</fileset>
     	</copy>
     	
-    	<war destfile="build/Projet_JEE.war" basedir="WebContent" needxmlfile="false">
+    	
+    	<war destfile="build/Projet_JEE.war" webxml="WebContent/WEB-INF/web.xml">
+    	            <fileset dir="WebContent"/>
+    	            <lib dir="WebContent/WEB-INF/lib"/>
+    	            <classes dir="build/classes"/>
     	</war>
     </target>
-    -->
+              	    
 </project>

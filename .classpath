@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.junit.jupiter.migrationsupport_5.5.1.v20190826-0900.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.junit.platform.engine_1.5.1.v20190826-0900.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api-3.0-alpha-1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
