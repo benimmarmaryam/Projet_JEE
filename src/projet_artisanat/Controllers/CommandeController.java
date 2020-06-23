@@ -92,10 +92,11 @@ public class CommandeController {
 		//mode paiement
 		commande.setCmdetat(modePaiment);
 		CommandeServiceImpl.commandeServiceImpl.save(commande);
+		
 		UtilisateurEntity utilisateur = UtilisateurServiceImpl.utilisateurServiceImpl.findById(SessionDBUtil.idUser);
 		utilisateur.setIdpanier(null);
 		UtilisateurServiceImpl.utilisateurServiceImpl.save(utilisateur);
-		SessionDBUtil.setMessage("Commande effectué avec succés");
+		SessionDBUtil.setMessage("Commande effectue avec succes");
 		return "/index.xhtml?faces-redirect=true";
 	}
 
